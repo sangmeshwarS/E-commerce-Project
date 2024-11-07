@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base ::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<section>
+<div class="container">
+<div class="row mt-5">
+
+<div class="col-md-4">
+
+<div class="card mb-3" style="max-width:330px; background-color: #f7f7f5; max-height: 200px;">
+  <div class="row no-gutters">
+    <div class="col-md-1">
+      <img src="/img/profileimage.svg" alt="" style="max-width: 50px;" class="ml-2 mt-2 mb-2">
+    </div>
+    <div class="col-md-11" 	>
+      <div class="card-body p-0">
+        <p class="card-text p-0 ml-5 mt-2"><span style="font-size:12px;">Hello,</span> <br> <b th:text="${user.name}"></b> </p>
+      </div>
+    </div>
+  </div>
+</div>
+<a th:href="@{'/profile1'(p='profile')}"><button class="btn btn-primary my-2" style="height:40px;width:130px;" type="button">Profile</button></a>
+<a th:href="@{'/profile1'(p='address')}"><button class="btn btn-primary mx-2" style="height:40px;width:130px;" type="button">Address</button></a>
+</div>
+
+<div class="col-md-8">
+
+<div th:if="${p1234 != null}">
+
+<div th:switch="${p1234}">
+	<div th:case="'profile'">
+<form action="profileProcess" class="mb-2" method="post">
+<h3>Profile Information</h3>
+  <div class="form-group mt-3">
+    <label for="exampleInputEmail1">Name</label>
+    <input type="text" id="exampleInputEmail1" class="form-control" name="proName" th:value="${user.name}" >
+    
+    
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail2">Mobile no</label>
+    <input type="number" id="exampleInputEmail2" class="form-control" name="proMobileNo">
+    
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail3">Locality</label>
+    <input type="text" id="exampleInputEmail3" class="form-control" name="proLocality" >
+    
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail4">City</label>
+    <input type="text" id="exampleInputEmail4" class="form-control"  name="proCity">
+    
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlSelect1">State</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="proState">
+    <option value="select state">Select state</option>
+      <option value="Andhra Pradesh">Andhra Pradesh</option>
+    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+    <option value="Assam">Assam</option>
+    <option value="Bihar">Bihar</option>
+    <option value="Chhattisgarh">Chhattisgarh</option>
+    <option value="Goa">Goa</option>
+    <option value="Gujarat">Gujarat</option>
+    <option value="Haryana">Haryana</option>
+    <option value="Himachal Pradesh">Himachal Pradesh</option>
+    <option value="Jharkhand">Jharkhand</option>
+    <option value="Karnataka">Karnataka</option>
+    <option value="Kerala">Kerala</option>
+    <option value="Madhya Pradesh">Madhya Pradesh</option>
+    <option value="Maharashtra">Maharashtra</option>
+    <option value="Manipur">Manipur</option>
+    <option value="Meghalaya">Meghalaya</option>
+    <option value="Mizoram">Mizoram</option>
+    <option value="Nagaland">Nagaland</option>
+    <option value="Odisha">Odisha</option>
+    <option value="Punjab">Punjab</option>
+    <option value="Rajasthan">Rajasthan</option>
+    <option value="Sikkim">Sikkim</option>
+    <option value="Tamil Nadu">Tamil Nadu</option>
+    <option value="Telangana">Telangana</option>
+    <option value="Tripura">Tripura</option>
+    <option value="Uttar Pradesh">Uttar Pradesh</option>
+    <option value="Uttarakhand">Uttarakhand</option>
+    <option value="West Bengal">West Bengal</option>
+    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+    <option value="Chandigarh">Chandigarh</option>
+    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+    <option value="Daman and Diu">Daman and Diu</option>
+    <option value="Lakshadweep">Lakshadweep</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Puducherry">Puducherry</option>
+    </select>
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail5">Pincode</label>
+    <input type="number" id="exampleInputEmail5" class="form-control" name="proPincode">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
+<div th:case="'address'">
+
+<div th:if="${#lists.isEmpty(profileList)}">
+
+<div class="container text-center mt-5">
+<h1>Please Add Address!!!</h1>
+<img alt="" src="img/location.png" style="max-height:200px; max-width:200px; aligh-items:center;" class="mt-5">
+
+</div>
+</div>
+
+<div th:unless="${#lists.isEmpty(profileList)}">
+	
+<div class="card mb-2" style="background-color: #f7f7f5;" th:each="e, eStat :${profileList}">
+<div class="card-body">
+<h3 class="text-primary"><b th:text="'Address ' + ${eStat.count}">Address</b> </h3>
+<div class="mt-3">
+<p><b>Name: </b><span th:text="${e.proName}"></span></p>
+<p><b>Mobile No: </b><span th:text="${e.proMobileNo}"></span></p>
+<p><b>Locality: </b><span th:text="${e.proLocality}"></span></p>
+<p><b>City: </b><span th:text="${e.proCity}"></span></p>
+<p><b>State: </b><span th:text="${e.proState}"></span></p>
+<p><b>Pincode: </b><span th:text="${e.proPincode}"></span></p>
+</div>
+
+<div class="text-center">
+<a th:href="@{'/updateprofile?id=' + ${e.id}}"><button class="btn btn-success">Update</button></a>
+<a th:href="@{'/deleteprofile?id=' + ${e.id}}"><button class="btn btn-danger">Delete</button></a>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<div th:case="'*'">
+	All Address
+</div>
+	
+</div>
+</div>
+
+<div th:unless="${p1234 != null}">
+
+<div th:if="${#lists.isEmpty(profileList)}">
+
+<form action="profileProcess" class="mb-2" method="post">
+<h3>Profile Information</h3>
+  <div class="form-group mt-3">
+    <label for="exampleInputEmail1">Name</label>
+    <input type="text" id="exampleInputEmail1" class="form-control" name="proName" th:value="${user.name}" >
+    
+    
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail2">Mobile no</label>
+    <input type="number" id="exampleInputEmail2" class="form-control" name="proMobileNo">
+    
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail3">Locality</label>
+    <input type="text" id="exampleInputEmail3" class="form-control" name="proLocality" >
+    
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail4">City</label>
+    <input type="text" id="exampleInputEmail4" class="form-control"  name="proCity">
+    
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlSelect1">State</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="proState">
+    <option value="select state">Select state</option>
+      <option value="Andhra Pradesh">Andhra Pradesh</option>
+    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+    <option value="Assam">Assam</option>
+    <option value="Bihar">Bihar</option>
+    <option value="Chhattisgarh">Chhattisgarh</option>
+    <option value="Goa">Goa</option>
+    <option value="Gujarat">Gujarat</option>
+    <option value="Haryana">Haryana</option>
+    <option value="Himachal Pradesh">Himachal Pradesh</option>
+    <option value="Jharkhand">Jharkhand</option>
+    <option value="Karnataka">Karnataka</option>
+    <option value="Kerala">Kerala</option>
+    <option value="Madhya Pradesh">Madhya Pradesh</option>
+    <option value="Maharashtra">Maharashtra</option>
+    <option value="Manipur">Manipur</option>
+    <option value="Meghalaya">Meghalaya</option>
+    <option value="Mizoram">Mizoram</option>
+    <option value="Nagaland">Nagaland</option>
+    <option value="Odisha">Odisha</option>
+    <option value="Punjab">Punjab</option>
+    <option value="Rajasthan">Rajasthan</option>
+    <option value="Sikkim">Sikkim</option>
+    <option value="Tamil Nadu">Tamil Nadu</option>
+    <option value="Telangana">Telangana</option>
+    <option value="Tripura">Tripura</option>
+    <option value="Uttar Pradesh">Uttar Pradesh</option>
+    <option value="Uttarakhand">Uttarakhand</option>
+    <option value="West Bengal">West Bengal</option>
+    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+    <option value="Chandigarh">Chandigarh</option>
+    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+    <option value="Daman and Diu">Daman and Diu</option>
+    <option value="Lakshadweep">Lakshadweep</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Puducherry">Puducherry</option>
+    </select>
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail5">Pincode</label>
+    <input type="number" id="exampleInputEmail5" class="form-control" name="proPincode">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+</div>
+
+<div th:unless="${#lists.isEmpty(profileList)}">
+
+<div th:if="${#lists.isEmpty(profileList)}">
+
+<div class="container text-center mt-5">
+<h1>Please Add Address!!!</h1>
+<img alt="" src="img/location.png" style="max-height:200px; max-width:200px; aligh-items:center;" class="mt-5">
+
+</div>
+</div>
+
+<div th:unless="${#lists.isEmpty(profileList)}">
+	
+<div class="card mb-2" style="background-color: #f7f7f5;" th:each="e, eStat :${profileList}">
+<div class="card-body">
+<h3 class="text-primary"><b th:text="'Address ' + ${eStat.count}">Address</b> </h3>
+<div class="mt-3">
+<p><b>Name: </b><span th:text="${e.proName}"></span></p>
+<p><b>Mobile No: </b><span th:text="${e.proMobileNo}"></span></p>
+<p><b>Locality: </b><span th:text="${e.proLocality}"></span></p>
+<p><b>City: </b><span th:text="${e.proCity}"></span></p>
+<p><b>State: </b><span th:text="${e.proState}"></span></p>
+<p><b>Pincode: </b><span th:text="${e.proPincode}"></span></p>
+</div>
+
+<div class="text-center">
+<a th:href="@{'/updateprofile?id=' + ${e.id}}"><button class="btn btn-success">Update</button></a>
+<a th:href="@{'/deleteprofile?id=' + ${e.id}}"><button class="btn btn-danger">Delete</button></a>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+</section>
+
+</body>
+</html>

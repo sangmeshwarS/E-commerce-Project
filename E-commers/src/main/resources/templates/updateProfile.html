@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base ::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+</head>
+<body>
+
+<section>
+<div class="container">
+<div class="row mt-4">
+<div class="col-md-8 offset-2">
+<div class="card">
+<div class="card-body">
+<div class="card-title">
+<h3>Profile Information</h3>
+</div>
+
+<form th:action="@{'/updateprofileProcess?id=' + ${UpdateProfile.id}}" method="post">
+
+  <div class="form-group mt-3">
+    <label for="exampleInputEmail1">Name</label>
+    <input type="text" id="exampleInputEmail1" class="form-control" name="u_proName" th:value="${UpdateProfile.proName}" >
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail2">Mobile no</label>
+    <input type="number" id="exampleInputEmail2" class="form-control" name="u_proMobileNo" th:value="${UpdateProfile.proMobileNo}">
+    
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail3">Locality</label>
+    <input type="text" id="exampleInputEmail3" class="form-control" name="u_proLocality" th:value="${UpdateProfile.proLocality}">
+    
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail4">City</label>
+    <input type="text" id="exampleInputEmail4" class="form-control"  name="u_proCity" th:value="${UpdateProfile.proCity}">
+    
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlSelect1">State</label>
+    <select class="form-control" id="exampleFormControlSelect1" name="u_proState" th:placeholder="${UpdateProfile.proState}" required>
+    <option value="select state">Select state</option>
+      <option value="Andhra Pradesh">Andhra Pradesh</option>
+    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+    <option value="Assam">Assam</option>
+    <option value="Bihar">Bihar</option>
+    <option value="Chhattisgarh">Chhattisgarh</option>
+    <option value="Goa">Goa</option>
+    <option value="Gujarat">Gujarat</option>
+    <option value="Haryana">Haryana</option>
+    <option value="Himachal Pradesh">Himachal Pradesh</option>
+    <option value="Jharkhand">Jharkhand</option>
+    <option value="Karnataka">Karnataka</option>
+    <option value="Kerala">Kerala</option>
+    <option value="Madhya Pradesh">Madhya Pradesh</option>
+    <option value="Maharashtra">Maharashtra</option>
+    <option value="Manipur">Manipur</option>
+    <option value="Meghalaya">Meghalaya</option>
+    <option value="Mizoram">Mizoram</option>
+    <option value="Nagaland">Nagaland</option>
+    <option value="Odisha">Odisha</option>
+    <option value="Punjab">Punjab</option>
+    <option value="Rajasthan">Rajasthan</option>
+    <option value="Sikkim">Sikkim</option>
+    <option value="Tamil Nadu">Tamil Nadu</option>
+    <option value="Telangana">Telangana</option>
+    <option value="Tripura">Tripura</option>
+    <option value="Uttar Pradesh">Uttar Pradesh</option>
+    <option value="Uttarakhand">Uttarakhand</option>
+    <option value="West Bengal">West Bengal</option>
+    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+    <option value="Chandigarh">Chandigarh</option>
+    <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+    <option value="Daman and Diu">Daman and Diu</option>
+    <option value="Lakshadweep">Lakshadweep</option>
+    <option value="Delhi">Delhi</option>
+    <option value="Puducherry">Puducherry</option>
+    </select>
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail5">Pincode</label>
+    <input type="number" id="exampleInputEmail5" class="form-control" name="u_proPincode" th:value="${UpdateProfile.proPincode}">
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+</body>
+</html>

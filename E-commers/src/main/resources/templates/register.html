@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html th:replace="base ::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+<!-- <section>
+<link rel="stylesheet"  href="/css/register.css">
+</section> -->
+</head>
+<body>
+
+<section>
+<div class="container">
+<div class="row mt-3">
+<div class="col-md-7 m-auto">
+<div class="card">
+<div class="card-header">
+<h1>
+Registration Form
+</h1>
+</div>
+<div class="card-body">
+
+<form th:action="@{registerProcess}" method="post" th:object="${userModel}">
+<div class="form-group">
+    <label for="exampleInputEmail1">Username</label>
+    <input type="text" name="name" th:classappend="${#fields.hasErrors('name')?'is-invalid':''}" class="form-control" th:value="${userModel.name}" id="exampleInputEmail1" aria-describedby="emailHelp">
+     <div class="invalid-feedback" th:each="e: ${#fields.errors('name')}" th:text="${e}">
+      </div>
+  </div> 
+  <div class="form-group">
+    <label for="exampleInputEmail2">Email address</label>
+    <input type="text" name="email" class="form-control" th:value="${userModel.email}" th:classappend="${#fields.hasErrors('email') ? 'is-invalid': ''}"  id="exampleInputEmail2" aria-describedby="emailHelp">
+         <div class="invalid-feedback" th:each="e: ${#fields.errors('email')}" th:text="${e}">
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword3">Password</label>
+    <input type="password" name="password" class="form-control" th:value="${userModel.password}" th:classappend="${#fields.hasErrors('password') ? 'is-invalid': ''}" id="exampleInputPassword3">
+         <div class="invalid-feedback" th:each="e: ${#fields.errors('password')}" th:text="${e}">
+      </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</section>
+
+</body>
+</html>

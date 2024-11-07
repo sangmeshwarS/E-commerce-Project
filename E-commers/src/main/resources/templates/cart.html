@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base ::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+</head>
+<body>
+
+<section>
+    <div th:if="${#lists.isEmpty(cList)}" class="text-center mt-5">
+        <h1>Your cart is empty!!!</h1>
+        <img src="img/emptycart.png" alt="Empty Cart" style="max-height:200px; max-width:200px;" class="mt-5">
+    </div>
+    
+    <div th:unless="${#lists.isEmpty(cList)}">
+        <div class="container mt-5">
+            <div class="row">
+                <!-- Shopping Cart Table -->
+                <div class="col-md-8 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header text-center">
+                            <h3>Shopping Cart</h3>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped text-center mb-0">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Total Price</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="e : ${cList}">
+                                            <td th:text="${e.pname}"></td>
+                                            <td>
+                                                <img th:src="@{'/img/' + ${e.pimage}}" alt="Product Image" class="img-fluid" style="max-height:80px; max-width:100px;">
+                                            </td>
+                                            <td th:text="${e.formattedPprice.substring(0, e.formattedPprice.indexOf('.') >= 0 ? e.formattedPprice.indexOf('.') : e.formattedPprice.length())}"></td>
+                                            <td>
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <a th:href="@{'/quantityDecrease?cid=' + ${e.id}}">
+                                                        <button class="btn btn-light p-1"><img th:src="@{/img/minus.png}" alt="Minus" style="width: 15px;"></button>
+                                                    </a>
+                                                    <span th:text="${e.pquantity}" class="mx-2"></span>
+                                                    <a th:href="@{'/quantityIncrease?cid=' + ${e.id}}">
+                                                        <button class="btn btn-light p-1"><img th:src="@{/img/add.png}" alt="Plus" style="width: 15px;"></button>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td th:text="${e.formattedTotalprice.substring(0, e.formattedTotalprice.indexOf('.') >= 0 ? e.formattedTotalprice.indexOf('.') : e.formattedTotalprice.length())}"></td>
+                                            <td>
+                                                <a th:href="@{'/deletecart?cid=' + ${e.id}}">
+                                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <p class="font-weight-bold text-success">Total Price: <span th:text="${totalPrice.substring(0, totalPrice.indexOf('.') >= 0 ? totalPrice.indexOf('.') : totalPrice.length())}"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Details -->
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header text-center">
+                            <h3>Price Details</h3>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                Price <span th:text="${actualPrice.substring(0, actualPrice.indexOf('.') >= 0 ? actualPrice.indexOf('.') : actualPrice.length())}"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                Discount <span th:text="'- ' + ${discount.substring(0, discount.indexOf('.') >= 0 ? discount.indexOf('.') : discount.length())}" class="text-success"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                Delivery Charges <span class="text-success">Free</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between font-weight-bold">
+                                Total Price <span th:text="${totalPrice.substring(0, totalPrice.indexOf('.') >= 0 ? totalPrice.indexOf('.') : totalPrice.length())}"></span>
+                            </li>
+                        </ul>
+                        <div class="card-footer text-center">
+                            <p class="text-success font-weight-bold">You will save <span th:text="${discount.substring(0, discount.indexOf('.') >= 0 ? discount.indexOf('.') : discount.length())}"></span> on this order</p>
+                            <a th:href="@{/checkout}">
+                                <button type="button" class="btn btn-success btn-block">Checkout</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+
+</body>
+</html>

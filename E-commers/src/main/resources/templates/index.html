@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base ::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3" th:each="e: ${list}">
+					<div class="card mt-3">
+						<div class="card-body m-auto">
+							<a th:href="@{'/details?id=' + ${e.id}}"><img
+								alt="Product Image" class="rounded mx-auto d-block" th:src="@{'/img/' + ${e.pimage}}"
+								style="width: 100px;"></a>
+						</div>
+						<div class="card-footer">
+							<b th:text="${e.pname}"></b>
+							<p th:text="${e.pdesc}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></p>
+							<b><span th:text=" &#8377 + ${e.pprice}"></span></b>&nbsp
+							<del>
+								<span th:text=" &#8377 + ${e.pActualPrice}" style="font-size: 13px;"></span>
+							</del>
+							&nbsp<span th:text="${e.pdiscount} + '%'" style="font-size: 13px; color: green;"></span>
+							<a th:href="@{'/cart?pid=' + ${e.id}}"><button type="button" class="btn btn-primary btn-block mt-2">Add to Cart</button></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

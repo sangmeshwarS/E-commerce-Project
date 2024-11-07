@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="base ::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+</head>
+<body>
+
+	<section>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<img alt="product-images" th:src="@{'/img/' + ${pList.pimage}}"
+						style="max-height: 350px; max-width: 350px; min-height: 250px; min-width: 300px; margin-top: 50px;"
+						class="">
+					<div style="margin-top: 80px; margin-bottom: 50px;">
+						<a th:href="@{'/cart?pid=' + ${pList.id}}"><button class="btn btn-primary"
+							style="width: 170px; height: 40px;" type="button">ADD TO
+							CART</button></a>
+						<button class="btn btn-primary"
+							style="width: 170px; height: 40px;">BUY NOW</button>
+					</div>
+				</div>
+				<div class="col-md-8 mt-5">
+					<h2 th:text="${pList.pname}"></h2>
+					<h3 th:text="${pList.pdesc}"></h3>
+					<p style="color: green; margin-top: 15px;">Special offer</p>
+					<p>
+					<!-- ${#numbers.formatCurrency(pList.pprice)} = This is use to format a number in dollar format -->
+						<b style="font-size: 30px;"
+							th:text=" &#8377 + ${pList.pprice}"> </b> &nbsp <span
+							style="font-size: 15px;"> <del
+								th:text=" &#8377 + ${pList.pActualPrice}"></del> <span
+							style="color: green;" th:text="${pList.pdiscount} + '% off'">
+						</span></span>
+					</p>
+
+					<b style="font-size: 18px;">Available offers</b>
+					<div class="mt-2">
+						<p>
+							<img alt="" src="img/tag.webp" style="max-width: 20px;"><strong
+								style="margin-left: 5px;">Bank Offer</strong> Lorem ipsum dolor,
+							sit amet consectetur adipisicing elit. Quibusdam quidem rem.
+						</p>
+						<p>
+							<img alt="" src="img/tag.webp" style="max-width: 20px;"><strong
+								style="margin-left: 5px;">Bank Offer</strong> Lorem ipsum dolor,
+							sit amet consectetur adipisicing elit. Quibusdam quidem.
+						</p>
+						<p>
+							<img alt="" src="img/tag.webp" style="max-width: 20px;"><strong
+								style="margin-left: 5px;">Bank Offer</strong> Lorem ipsum dolor,
+							sit amet consectetur adipisicing elit.
+						</p>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+
+</body>
+</html>
