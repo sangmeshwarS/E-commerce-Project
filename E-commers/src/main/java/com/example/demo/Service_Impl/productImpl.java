@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -21,12 +23,16 @@ public class productImpl implements productDao{
 	
 	@Autowired
 	private	ProductRepo productRepo;
+	
+	NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 
 	@Override
 	public ProductModel save(ProductModel p,
 			MultipartFile pimage) {
 		// TODO Auto-generated method stub
 		p = new ProductModel(p.getPname(), p.getPdesc(), p.getPquantity(), p.getpActualPrice(), p.getPprice(), p.getPdiscount(), pimage.getOriginalFilename());
+		p.setFormattedpPrice(numberFormat.format(p.getPprice()));
+		p.setFormattedpActualPrice(numberFormat.format(p.getpActualPrice()));
 		productRepo.save(p);
 		System.out.println(p);
 		try {

@@ -31,9 +31,9 @@
 					<p>
 					<!-- ${#numbers.formatCurrency(pList.pprice)} = This is use to format a number in dollar format -->
 						<b style="font-size: 30px;"
-							th:text=" &#8377 + ${pList.pprice}"> </b> &nbsp <span
+							th:text="${pList.formattedpPrice.substring(0, pList.formattedpPrice.indexOf('.') >= 0 ? pList.formattedpPrice.indexOf('.') : pList.formattedpPrice.length())}"> </b> &nbsp <span
 							style="font-size: 15px;"> <del
-								th:text=" &#8377 + ${pList.pActualPrice}"></del> <span
+								th:text="${pList.formattedpActualPrice.substring(0, pList.formattedpActualPrice.indexOf('.') >= 0 ? pList.formattedpActualPrice.indexOf('.') : pList.formattedpActualPrice.length())}"></del> <span
 							style="color: green;" th:text="${pList.pdiscount} + '% off'">
 						</span></span>
 					</p>

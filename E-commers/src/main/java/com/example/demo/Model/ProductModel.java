@@ -13,11 +13,32 @@ public class ProductModel {
 	private String pname;
 	private String pdesc;
 	private int pquantity;
-	private int pActualPrice;
-	private int pprice;
+	private double pActualPrice;
+	private String formattedpActualPrice;
+	private double pprice;
+	private String formattedpPrice;
 	private int pdiscount;
 	private String pimage;
-	public ProductModel(String pname, String pdesc, int pquantity, int pActualPrice, int pprice, int pdiscount,
+	
+	public String getFormattedpActualPrice() {
+		return formattedpActualPrice;
+	}
+	public void setFormattedpActualPrice(String formattedpActualPrice) {
+		this.formattedpActualPrice = formattedpActualPrice;
+	}
+	public String getFormattedpPrice() {
+		return formattedpPrice;
+	}
+	public void setFormattedpPrice(String formattedpPrice) {
+		this.formattedpPrice = formattedpPrice;
+	}
+	public void setpActualPrice(double pActualPrice) {
+		this.pActualPrice = pActualPrice;
+	}
+	public void setPprice(double pprice) {
+		this.pprice = pprice;
+	}
+	public ProductModel(String pname, String pdesc, int pquantity, double pActualPrice, double pprice, int pdiscount,
 			String pimage) {
 		super();
 		this.pname = pname;
@@ -56,17 +77,11 @@ public class ProductModel {
 	public void setPquantity(int pquantity) {
 		this.pquantity = pquantity;
 	}
-	public int getpActualPrice() {
+	public double getpActualPrice() {
 		return pActualPrice;
 	}
-	public void setpActualPrice(int pActualPrice) {
-		this.pActualPrice = pActualPrice;
-	}
-	public int getPprice() {
+	public double getPprice() {
 		return pprice;
-	}
-	public void setPprice(int pprice) {
-		this.pprice = pprice;
 	}
 	public int getPdiscount() {
 		return pdiscount;

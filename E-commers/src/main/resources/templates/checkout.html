@@ -68,15 +68,15 @@
     <tr  th:each="e: ${cList}">   
       <td th:text="${e.pname}"></td>
       <td><img alt="Product Image" style=" min-width:145px; max-height:80px; max-width:150px;" th:src="@{'/img/' + ${e.pimage}}"></td>
-      <td th:text="&#8377 + ${e.pprice}"></td>
+      <td th:text="${e.formattedPprice.substring(0, e.formattedPprice.indexOf('.') >= 0 ? e.formattedPprice.indexOf('.') : e.formattedPprice.length())}"></td>
       <td> <div class="text-center">      
       <span th:text="${e.pquantity}" id="span"></span>      
       </div></td>
-      <td th:text="&#8377 + ${e.totalprice}"></td>   
+      <td th:text="${e.formattedTotalprice.substring(0, e.formattedTotalprice.indexOf('.') >= 0 ? e.formattedTotalprice.indexOf('.') : e.formattedTotalprice.length())}"></td>   
     </tr>
   </tbody>
 </table>
-<p class="font-weight-bold text-success text-end fs-5">TotalPrize:- <span th:text="${totalPrice}"> </span> </p>
+<p class="font-weight-bold text-success text-end fs-5">TotalPrize:- <span th:text="${totalPrice.substring(0, totalPrice.indexOf('.') >= 0 ? totalPrice.indexOf('.') : totalPrice.length())}"> </span> </p>
 </div>
     
 </div>

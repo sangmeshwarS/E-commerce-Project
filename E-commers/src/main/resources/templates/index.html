@@ -9,7 +9,9 @@
 <body>
 
 	<section>
+		
 		<div class="container">
+		
 			<div class="row">
 				<div class="col-md-3" th:each="e: ${list}">
 					<div class="card mt-3">
@@ -21,9 +23,10 @@
 						<div class="card-footer">
 							<b th:text="${e.pname}"></b>
 							<p th:text="${e.pdesc}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></p>
-							<b><span th:text=" &#8377 + ${e.pprice}"></span></b>&nbsp
+							<b>
+							<span th:text="${e.formattedpPrice.substring(0, e.formattedpPrice.indexOf('.') >= 0 ? e.formattedpPrice.indexOf('.') : e.formattedpPrice.length())}"></span></b>&nbsp
 							<del>
-								<span th:text=" &#8377 + ${e.pActualPrice}" style="font-size: 13px;"></span>
+								<span th:text="${e.formattedpActualPrice.substring(0, e.formattedpActualPrice.indexOf('.') >= 0 ? e.formattedpActualPrice.indexOf('.') : e.formattedpActualPrice.length())}" style="font-size: 13px;"></span>
 							</del>
 							&nbsp<span th:text="${e.pdiscount} + '%'" style="font-size: 13px; color: green;"></span>
 							<a th:href="@{'/cart?pid=' + ${e.id}}"><button type="button" class="btn btn-primary btn-block mt-2">Add to Cart</button></a>
