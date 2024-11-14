@@ -44,6 +44,8 @@ public class OrderController {
 	@Autowired
 	private ProfileRepo profileRepo;
 	
+	NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+	
 	@ModelAttribute
 	public void userDetails(Principal principal, Model model) {
 		if(principal!=null) {
@@ -62,7 +64,7 @@ public class OrderController {
 	
 	@RequestMapping("/Checkout")
 	public String checkout(Principal principal, Model m) {
-		NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+		
 		List<CartModel> cartModels =cartRepo.getByEmail(principal.getName());
 		m.addAttribute("cList", cartModels);
 		
@@ -104,13 +106,18 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/orderList")
-	public String orderList(Principal principal, Model model) {
-		
+	public String orderList(Principal principal, Model model) {		
 		List<OrderModel> orderModels =	orderRepo.findByUemail(principal.getName());
 		model.addAttribute("oList", orderModels);
+		double totalPrice = cartImpl.getTotalPrice(principal.getName());
+		model.addAttribute("totalPrice", currencyFormatter.format(totalPrice));
 		return "MyOrders";
 	}
 	
-	
+	@RequestMapping("/checkout1")
+	public String checkoutOne(@RequestParam("pid")int id) {
+		
+		return "redirect:/Checkout";
+	}
 
 }

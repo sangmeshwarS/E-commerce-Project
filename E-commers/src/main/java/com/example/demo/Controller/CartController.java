@@ -42,17 +42,17 @@ public class CartController {
 	}
 	
 	@RequestMapping("/cart")
-	public String save(@RequestParam("pid")int pid, CartModel cartModel, Principal principal) {
+	public String save(@RequestParam(value = "pid", required = false)Integer pid, CartModel cartModel, Principal principal) {
 		CartModel cartModel2 =	cartImpl.addtoCart(pid, cartModel, principal);
 		if(cartModel2 != null) {
-			return "redirect:/Cart";
+			return "/Cart";
 		}else {
 			return "index";
 		}
 	}
 	
 	@RequestMapping("/Cart")
-	public String cart (Principal principal, Model m) {
+	public String cart (@RequestParam(value = "pid", required = false)Integer pid, Principal principal, Model m) {
 		NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 		List<CartModel> cartModels =cartRepo.getByEmail(principal.getName());
 		m.addAttribute("cList", cartModels);

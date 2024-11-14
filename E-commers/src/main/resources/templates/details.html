@@ -20,8 +20,8 @@
 						<a th:href="@{'/cart?pid=' + ${pList.id}}"><button class="btn btn-primary"
 							style="width: 170px; height: 40px;" type="button">ADD TO
 							CART</button></a>
-						<button class="btn btn-primary"
-							style="width: 170px; height: 40px;">BUY NOW</button>
+						<a th:href="@{'/checkout1?pid=' + ${pList.id}}"><button class="btn btn-primary"
+							style="width: 170px; height: 40px;">BUY NOW</button></a>	
 					</div>
 				</div>
 				<div class="col-md-8 mt-5">
