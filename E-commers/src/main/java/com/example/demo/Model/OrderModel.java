@@ -21,6 +21,7 @@ public class OrderModel {
 	private String oStatus;
 	private Date odate;
 	private double oprice;
+	private String formattedOprice;
 	private String pname;
 	private String pimage;
 	private int pquantity;
@@ -58,6 +59,13 @@ public class OrderModel {
 	public OrderModel() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public String getFormattedOprice() {
+		return formattedOprice;
+	}
+	public void setFormattedOprice(String formattedOprice) {
+		this.formattedOprice = formattedOprice;
 	}
 	public int getId() {
 		return id;

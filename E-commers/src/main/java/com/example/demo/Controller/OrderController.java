@@ -58,7 +58,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/checkout")
-	public String checkoutOrder() {
+	public String checkout() {
 		return "redirect:/Checkout";
 	}
 	
@@ -85,12 +85,6 @@ public class OrderController {
 	
 	@RequestMapping("/userAddress")
 	public String userAddress(@RequestParam("exampleRadios")int selected, Principal principal) {	
-//		OrderModel orderModel2 = orderImpl.save(selected, orderModel, principal.getName());
-//		if(orderModel2!=null) {
-//			return "redirect:/orderPlaced";
-//		}else {
-//			return null;
-//		}
 		List<OrderModel> orderModel =	orderImpl.save(selected, principal.getName());
 		if(!orderModel.isEmpty()) {
 			return "redirect:/orderPlaced";
@@ -109,8 +103,6 @@ public class OrderController {
 	public String orderList(Principal principal, Model model) {		
 		List<OrderModel> orderModels =	orderRepo.findByUemail(principal.getName());
 		model.addAttribute("oList", orderModels);
-		double totalPrice = cartImpl.getTotalPrice(principal.getName());
-		model.addAttribute("totalPrice", currencyFormatter.format(totalPrice));
 		return "MyOrders";
 	}
 	

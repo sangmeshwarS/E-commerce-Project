@@ -1,9 +1,11 @@
 package com.example.demo.Service_Impl;
 
 import java.security.Principal;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,8 @@ public class OrderImpl implements OrderDao{
 	
 	@Autowired
 	private ProfileRepo profileRepo;
+	
+	NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 
 	@Override
 	public List<OrderModel> save(int id, String email) {
@@ -37,6 +41,7 @@ public class OrderImpl implements OrderDao{
 		for(CartModel cartModel: cartModel1) {
 			
 		OrderModel orderModel = new OrderModel("Processing", new Date(), cartModel.getTotalprice(), cartModel.getPname(), cartModel.getPimage(), cartModel.getPquantity(), profileModel.getProLocality(), profileModel.getProCity(), profileModel.getProState(), profileModel.getProPincode(), email);
+		orderModel.setFormattedOprice(numberFormat.format(orderModel.getOprice()));
 		OrderModel orderModel1 =	orderRepo.save(orderModel);
 		orderModels.add(orderModel);
 		
@@ -50,23 +55,5 @@ public class OrderImpl implements OrderDao{
 		}
 		return orderModels;
 	}
-
-//	@Override
-//	public OrderModel save(int id, OrderModel orderModel, String email) {
-//		// TODO Auto-generated method stub
-//		ProfileModel profileModel =	profileRepo.findById(id).get();     
-//		CartModel cartModels =	cartRepo.findByEmail(email);
-//		orderModel.setOdate(new Date());
-//		orderModel.setoStatus("Processing...");
-//		orderModel.setCartModel(cartModels);
-//		orderModel.setProfileModel(profileModel);
-//		OrderModel orderModel2 =	orderRepo.save(orderModel);
-//		if(orderModel2!=null) {
-//			System.out.println("Order Placed!!!");
-//			return orderModel;
-//		}else {
-//			return null;
-//		}
-//	}
 
 }

@@ -45,7 +45,7 @@ public class CartController {
 	public String save(@RequestParam(value = "pid", required = false)Integer pid, CartModel cartModel, Principal principal) {
 		CartModel cartModel2 =	cartImpl.addtoCart(pid, cartModel, principal);
 		if(cartModel2 != null) {
-			return "/Cart";
+			return "redirect:/Cart";
 		}else {
 			return "index";
 		}
@@ -57,13 +57,14 @@ public class CartController {
 		List<CartModel> cartModels =cartRepo.getByEmail(principal.getName());
 		m.addAttribute("cList", cartModels);
 		
-		if(cartModels!=null) {			
+		if(!cartModels.isEmpty()) {			
 		double totalPrice = cartImpl.getTotalPrice(principal.getName());
 		m.addAttribute("totalPrice", currencyFormatter.format(totalPrice));
 		double actualPrice = cartImpl.getActualPrice(principal.getName());
 		m.addAttribute("actualPrice", currencyFormatter.format(actualPrice));
 		double discount = actualPrice - totalPrice;
 		m.addAttribute("discount", currencyFormatter.format(discount));
+			
 		}else {
 			return "cart";
 		}

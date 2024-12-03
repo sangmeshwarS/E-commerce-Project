@@ -65,7 +65,7 @@
     </tr>
   </thead>
   <tbody> 
-    <tr  th:each="e: ${cList}">   
+    <tr th:each="e: ${cList}">   
       <td th:text="${e.pname}"></td>
       <td><img alt="Product Image" style=" min-width:145px; max-height:80px; max-width:150px;" th:src="@{'/img/' + ${e.pimage}}"></td>
       <td th:text="${e.formattedPprice.substring(0, e.formattedPprice.indexOf('.') >= 0 ? e.formattedPprice.indexOf('.') : e.formattedPprice.length())}"></td>
@@ -175,10 +175,8 @@
                             </li>
                         </ul>
                         <div class="card-footer text-center">
-                            <p class="text-success font-weight-bold">You will save <span th:text="${discount.substring(0, discount.indexOf('.') >= 0 ? discount.indexOf('.') : discount.length())}"></span> on this order</p>
-                            <a th:href="@{/checkout}">
-                                <button type="button" class="btn btn-success btn-block">Place Order</button>
-                            </a>
+                            <p class="text-success font-weight-bold">You will save <span th:text="${discount.substring(0, discount.indexOf('.') >= 0 ? discount.indexOf('.') : discount.length())}"></span> on this order</p>                           
+                                <button type="submit" class="btn btn-success btn-block">Place Order</button>                            
                         </div>
                     </div>
                 </div>
